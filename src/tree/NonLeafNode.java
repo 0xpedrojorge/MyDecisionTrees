@@ -4,10 +4,13 @@ import java.util.HashMap;
 
 public class NonLeafNode extends Node {
     private String splittigAttribute;
-    private HashMap<String, Node> descendents;
+    public HashMap<String, Node> descendents;
 
     public NonLeafNode (String[][] data, int lines, int cols) {
         super(data, lines, cols);
+    }
+    public NonLeafNode (Node parent, String[][] data, int lines, int cols) {
+        super(parent, data, lines, cols);
     }
 
     public void setSplittigAttribute(int col) {
