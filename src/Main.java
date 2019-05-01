@@ -9,9 +9,7 @@ public class Main {
         ID3 id3 = new ID3();
 
         Tree tree = dataManager.readCSVFile(args[0]);
-        tree.getRoot().printNode();
 
-        System.out.println();
         id3.createTree(tree);
 
     }
