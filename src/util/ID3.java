@@ -8,20 +8,18 @@ import java.util.Map;
 public class ID3 {
 
     public void createTree(Node node) {
-        System.out.println("--");
         if (node == null) return;
-        if (isPure(node.getData(), node.getLines(), node.getCols())) {
-            //node.printNode();
-            return;
-        } else {
-            NonLeafNode node1 = (NonLeafNode) node;
+        if (!isPure(node.getData(), node.getLines(), node.getCols())) {
 
+            NonLeafNode node1 = (NonLeafNode) node;
+            System.out.println("-----------------------------------------");
+            node1.printNode();
+            System.out.println();
             split(node1);
-            //node1.printNode();
+
             HashMap<String, Node> child = node1.getDescendents();
 
             for (Map.Entry<String, Node> entry : child.entrySet()) {
-                entry.getValue().printNode();;
                 createTree(entry.getValue());
             }
         }
@@ -29,10 +27,11 @@ public class ID3 {
 
     private void split(NonLeafNode node) {
         int bestCol = getBestColToSplit(node);
-        System.out.println(bestCol);
+        System.out.println("Splitting by col: " + node.getData()[0][bestCol]);
+        System.out.println();
 
         HashMap<String, Integer> diffAtt = node.getDiffAttributes(bestCol);
-        node.printNode();
+
         for (Map.Entry<String, Integer> entry : diffAtt.entrySet()) {
 
             int lines = entry.getValue()+1;
@@ -64,11 +63,17 @@ public class ID3 {
 
             if (isPure(childData, lines, node.getCols()-1)) {
                 LeafNode child = new LeafNode(node, childData, lines, node.getCols()-1);
-                node.descendents.put(entry.getKey(), child);
+                node.getDescendents().put(entry.getKey(), child);
+                System.out.println("Pure child:");
+                child.printNode();
+                System.out.println();
             } else {
                 NonLeafNode child = new NonLeafNode(node, childData, lines, node.getCols() - 1);
                 child.setSplittigAttribute(bestCol);
-                node.descendents.put(entry.getKey(), child);
+                node.getDescendents().put(entry.getKey(), child);
+                System.out.println("Non pure child:");
+                child.printNode();
+                System.out.println();
             }
 
         }
@@ -126,7 +131,7 @@ public class ID3 {
             gain -= (possibleDescendentsSize[i]/fatherSize) * possibleDescendentsEntropy[i];
         }
 
-        return gain;
+        return (float )gain;
     }
 
     private double getNodeEntropy(Node node) {

@@ -4,7 +4,7 @@ import java.util.HashMap;
 //3
 public class NonLeafNode extends Node {
     private String splittigAttribute;
-    public HashMap<String, Node> descendents;
+    private HashMap<String, Node> descendents;
 
     public NonLeafNode (String[][] data, int lines, int cols) {
         super(data, lines, cols);
