@@ -32,15 +32,14 @@ public class ID3 {
         System.out.println(bestCol);
 
         HashMap<String, Integer> diffAtt = node.getDiffAttributes(bestCol);
-
+        node.printNode();
         for (Map.Entry<String, Integer> entry : diffAtt.entrySet()) {
 
-            int lines = entry.getValue() + 1;
-            String[][] childData = new String[lines][node.getCols() - 1];
-            int t = 0;
-            for (int i = 0; i < node.getCols(); i++) {
+            int lines = entry.getValue()+1;
+            String[][] childData = new String[lines][node.getCols()-1];
+            int t=0;
+            for(int i=0; i<node.getCols(); i++) {
                 if (i == bestCol) {
-
                     continue;
                 }
                 childData[0][t] = node.getData()[0][i];
@@ -48,10 +47,10 @@ public class ID3 {
             }
 
             int lineInChild = 1;
-            for (int i = 1; i < node.getLines(); i++) {
-                int k = 0;
+            for(int i=1; i<node.getLines(); i++) {
+                int k=0;
                 if (node.getData()[i][bestCol].equals(entry.getKey())) {
-                    for (int j = 0; j < node.getCols(); j++) {
+                    for(int j=0; j<node.getCols(); j++) {
                         if (j == bestCol) {
                             continue;
                         }
@@ -62,8 +61,9 @@ public class ID3 {
                 }
             }
 
-            if (isPure(childData, lines, node.getCols() - 1)) {
-                LeafNode child = new LeafNode(node, childData, lines, node.getCols() - 1);
+
+            if (isPure(childData, lines, node.getCols()-1)) {
+                LeafNode child = new LeafNode(node, childData, lines, node.getCols()-1);
                 node.descendents.put(entry.getKey(), child);
             } else {
                 NonLeafNode child = new NonLeafNode(node, childData, lines, node.getCols() - 1);
@@ -79,7 +79,7 @@ public class ID3 {
     private int getBestColToSplit(NonLeafNode node) {
         double maxGain = Double.MIN_VALUE;
         int bestCol = 1;
-        for (int i = 1; i < node.getCols() - 2; i++) {
+        for (int i=1; i<node.getCols()-2; i++) {
             double tempGain = gain(node, i);
             if (tempGain > maxGain) {
                 maxGain = tempGain;
@@ -91,7 +91,7 @@ public class ID3 {
 
     private double gain(Node node, int attibuteCol) {
         double fatherEntropy = getNodeEntropy(node);
-        double fatherSize = node.getLines() - 1;
+        double fatherSize = node.getLines()-1;
 
         HashMap<String, Integer> diffAtt = node.getDiffAttributes(attibuteCol);
 
@@ -102,28 +102,28 @@ public class ID3 {
         for (Map.Entry<String, Integer> entry : diffAtt.entrySet()) {
 
             int timeAttributeAppears = entry.getValue();
-            String[][] fakeChildData = new String[timeAttributeAppears + 1][node.getCols()];
-            for (int i = 0; i < node.getCols(); i++) {
+            String[][] fakeChildData = new String[timeAttributeAppears+1][node.getCols()];
+            for(int i=0; i<node.getCols(); i++) {
                 fakeChildData[0][i] = node.getData()[0][i];
             }
             int lineInChild = 1;
-            for (int i = 1; i < node.getLines(); i++) {
+            for(int i=1; i<node.getLines(); i++) {
                 if (node.getData()[i][attibuteCol].equals(entry.getKey())) {
-                    for (int j = 0; j < node.getCols(); j++) {
+                    for(int j=0; j<node.getCols(); j++) {
                         fakeChildData[lineInChild][j] = node.getData()[i][j];
                     }
                     lineInChild++;
                 }
             }
-            NonLeafNode fakeChild = new NonLeafNode(fakeChildData, timeAttributeAppears + 1, node.getCols());
+            NonLeafNode fakeChild = new NonLeafNode(fakeChildData, timeAttributeAppears+1, node.getCols());
             possibleDescendentsEntropy[index] = getNodeEntropy(fakeChild);
             possibleDescendentsSize[index] = timeAttributeAppears;
             index++;
         }
 
         double gain = fatherEntropy;
-        for (int i = 0; i < diffAtt.size(); i++) {
-            gain -= (possibleDescendentsSize[i] / fatherSize) * possibleDescendentsEntropy[i];
+        for (int i=0; i<diffAtt.size(); i++) {
+            gain -= (possibleDescendentsSize[i]/fatherSize) * possibleDescendentsEntropy[i];
         }
 
         return gain;
@@ -135,7 +135,7 @@ public class ID3 {
 
         double entropy = 0.0;
         for (Map.Entry<String, Integer> entry : diffOut.entrySet()) {
-            double p = (double) entry.getValue() / (double) (node.getLines() - 1);
+            double p = (double) entry.getValue() / (double) (node.getLines()-1);
             entropy -= p * (Math.log(p) / Math.log(2));
         }
 
@@ -143,9 +143,11 @@ public class ID3 {
     }
 
     private boolean isPure(String[][] data, int lines, int cols) {
-        String flag = data[1][cols - 1];
-        for (int i = 1; i < lines; i++) {
-            if (!data[i][cols - 1].equals(flag)) {
+
+        String flag = data[1][cols-1];
+
+        for (int i=1; i<lines; i++) {
+            if (!data[i][cols-1].equals(flag)) {
                 return false;
             }
         }
