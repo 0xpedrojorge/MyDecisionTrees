@@ -48,8 +48,15 @@ public class ID3 {
                     lineInChild++;
                 }
             }
-            NonLeafNode child = new NonLeafNode(node, childData, lines, node.getCols()-1);
+
+            Node child;
+            if (isPure(childData, lines, node.getCols()-1)) {
+                child = new LeafNode(node, childData, lines, node.getCols()-1);
+            } else {
+                child = new NonLeafNode(node, childData, lines, node.getCols() - 1);
+            }
             node.descendents.put(entry.getKey(), child);
+
         }
 
 
@@ -119,5 +126,15 @@ public class ID3 {
         }
 
         return entropy;
+    }
+
+    private boolean isPure(String[][] data, int lines, int cols) {
+        String flag = data[1][cols-1];
+        for (int i=1; i<lines-1; i++) {
+            if (!data[i][cols-1].equals(flag)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
