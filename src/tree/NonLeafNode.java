@@ -8,9 +8,11 @@ public class NonLeafNode extends Node {
 
     public NonLeafNode (String[][] data, int lines, int cols) {
         super(data, lines, cols);
+        descendents = new HashMap<>();
     }
     public NonLeafNode (Node parent, String[][] data, int lines, int cols) {
         super(parent, data, lines, cols);
+        descendents = new HashMap<>();
     }
 
     public void setSplittigAttribute(int col) {

@@ -10,6 +10,8 @@ public class ID3 {
 
     public void createTree (Tree tree) {
         split(tree.getRoot());
+
+        //continua o método
     }
 
     private void split(NonLeafNode node) {
@@ -47,28 +49,13 @@ public class ID3 {
                 }
             }
             NonLeafNode child = new NonLeafNode(node, childData, lines, node.getCols()-1);
-            child.printNode();
             node.descendents.put(entry.getKey(), child);
-            System.out.println();
         }
-
-        /*for (Map.Entry<String, Node> entry : node.descendents.entrySet()) {
-            boolean isPure = false;
-
-            //check if subset is pure, if so set isPure to true
-
-            if (isPure) {
-                continue;
-            } else {
-                split(entry.getValue());
-            }
-
-        }*/
 
 
     }
 
-    public int getBestColToSplit(NonLeafNode node) {
+    private int getBestColToSplit(NonLeafNode node) {
         double maxGain = Double.MIN_VALUE;
         int bestCol = 1;
         for (int i=1; i<node.getCols()-2; i++) {
