@@ -23,4 +23,7 @@ public class NonLeafNode extends Node {
         return this.splittigAttribute;
     }
 
+    public HashMap<String, Node> getDescendents() {
+        return descendents;
+    }
 }

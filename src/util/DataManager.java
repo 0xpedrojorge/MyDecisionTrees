@@ -24,7 +24,8 @@ public class DataManager {
                 numberOfLines++;
             }
         } catch (Exception e) {
-
+            System.out.println("oi");
+            //System.out.println("ERROR: " + e.getMessage());
         }
 
         String[][] data = new String[numberOfLines][attributeNumber];
@@ -46,6 +47,7 @@ public class DataManager {
             e.printStackTrace();
         }
         Tree tree = new Tree(new NonLeafNode(data, numberOfLines, attributeNumber));
+        System.out.println("o");
         return tree;
     }
 
