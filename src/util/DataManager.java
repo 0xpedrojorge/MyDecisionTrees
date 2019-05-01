@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class DataManager {
 
     public Tree readCSVFile(String path) {
+        System.out.println("Reading file....");
 
         int numberOfLines = 0;
         boolean isFirstLine = true;
@@ -24,7 +25,7 @@ public class DataManager {
                 numberOfLines++;
             }
         } catch (Exception e) {
-            System.out.println("Done reading file");
+            System.out.println("Done reading file.");
         }
 
         String[][] data = new String[numberOfLines][attributeNumber];
