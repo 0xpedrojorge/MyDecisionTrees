@@ -3,7 +3,6 @@ package util;
 import tree.*;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Map;
 
 public class ID3 {
@@ -18,7 +17,7 @@ public class ID3 {
         int bestCol = getBestColToSplit(node);
 
         HashMap<String, Integer> diffAtt = node.getDiffAttributes(bestCol);
-
+        node.printNode();
         for (Map.Entry<String, Integer> entry : diffAtt.entrySet()) {
 
             int lines = entry.getValue()+1;
@@ -26,7 +25,6 @@ public class ID3 {
             int t=0;
             for(int i=0; i<node.getCols(); i++) {
                 if (i == bestCol) {
-                    t--;
                     continue;
                 }
                 childData[0][t] = node.getData()[0][i];
@@ -39,7 +37,6 @@ public class ID3 {
                 if (node.getData()[i][bestCol].equals(entry.getKey())) {
                     for(int j=0; j<node.getCols(); j++) {
                         if (j == bestCol) {
-                            k--;
                             continue;
                         }
                         childData[lineInChild][k] = node.getData()[i][j];
@@ -48,6 +45,7 @@ public class ID3 {
                     lineInChild++;
                 }
             }
+
 
             if (isPure(childData, lines, node.getCols()-1)) {
                 LeafNode child = new LeafNode(node, childData, lines, node.getCols()-1);
@@ -130,6 +128,7 @@ public class ID3 {
     }
 
     private boolean isPure(String[][] data, int lines, int cols) {
+
         String flag = data[1][cols-1];
         for (int i=1; i<lines-1; i++) {
             if (!data[i][cols-1].equals(flag)) {
