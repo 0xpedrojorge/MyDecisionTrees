@@ -90,7 +90,7 @@ public class ID3 {
         }
         return bestCol;
     }
-
+//ES GAYYYYY!
     private double gain(Node node, int attibuteCol) {
         double fatherEntropy = getNodeEntropy(node);
         double fatherSize = node.getLines() - 1;

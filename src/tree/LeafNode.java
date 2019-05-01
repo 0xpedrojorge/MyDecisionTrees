@@ -1,6 +1,7 @@
 package tree;
 
 public class LeafNode extends Node {
+    //3
     private String classification;
 
     public LeafNode (Node parent, String[][] data, int lines, int cols) {

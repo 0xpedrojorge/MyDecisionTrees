@@ -1,7 +1,7 @@
 package tree;
 
 import java.util.HashMap;
-
+//3
 public class NonLeafNode extends Node {
     private String splittigAttribute;
     public HashMap<String, Node> descendents;

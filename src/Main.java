@@ -3,7 +3,7 @@ import util.DataManager;
 import util.ID3;
 
 public class Main {
-
+//3
     public static void main(String[] args) {
         DataManager dataManager = new DataManager();
         ID3 id3 = new ID3();

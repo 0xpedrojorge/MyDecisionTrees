@@ -1,6 +1,7 @@
 package tree;
 
 public class Tree {
+    //3
     private NonLeafNode root;
 
     public Tree (NonLeafNode root) {

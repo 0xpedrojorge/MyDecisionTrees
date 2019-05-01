@@ -20,7 +20,7 @@ public abstract class Node {
         this.cols = cols;
         this.parent = parent;
     }
-
+//3
     public String[][] getData() {
         return data;
     }

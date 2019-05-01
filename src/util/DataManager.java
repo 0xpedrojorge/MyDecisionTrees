@@ -27,7 +27,7 @@ public class DataManager {
             System.out.println("oi");
             //System.out.println("ERROR: " + e.getMessage());
         }
-
+//3
         String[][] data = new String[numberOfLines][attributeNumber];
 
         try {
