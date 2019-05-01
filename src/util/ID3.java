@@ -49,13 +49,14 @@ public class ID3 {
                 }
             }
 
-            Node child;
             if (isPure(childData, lines, node.getCols()-1)) {
-                child = new LeafNode(node, childData, lines, node.getCols()-1);
+                LeafNode child = new LeafNode(node, childData, lines, node.getCols()-1);
+                node.descendents.put(entry.getKey(), child);
             } else {
-                child = new NonLeafNode(node, childData, lines, node.getCols() - 1);
+                NonLeafNode child = new NonLeafNode(node, childData, lines, node.getCols() - 1);
+                child.setSplittigAttribute(bestCol);
+                node.descendents.put(entry.getKey(), child);
             }
-            node.descendents.put(entry.getKey(), child);
 
         }
 

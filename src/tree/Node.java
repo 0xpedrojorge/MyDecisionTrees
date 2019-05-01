@@ -1,7 +1,6 @@
 package tree;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 
 public abstract class Node {
     protected String[][] data;

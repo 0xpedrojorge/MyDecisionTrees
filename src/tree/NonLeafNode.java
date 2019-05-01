@@ -16,7 +16,7 @@ public class NonLeafNode extends Node {
     }
 
     public void setSplittigAttribute(int col) {
-        this.splittigAttribute = this.data[0][col];
+        this.splittigAttribute = this.parent.data[0][col];
     }
 
     public String getSplittigAttribute() {
