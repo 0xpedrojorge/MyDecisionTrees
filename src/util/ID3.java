@@ -10,7 +10,6 @@ public class ID3 {
     public void createTree(Node node) {
         if (node == null) return;
         if (!isPure(node.getData(), node.getLines(), node.getCols())) {
-
             NonLeafNode node1 = (NonLeafNode) node;
 
             split(node1);
@@ -60,6 +59,7 @@ public class ID3 {
             if (isPure(childData, lines, node.getCols() - 1)) {
                 LeafNode child = new LeafNode(node, childData, lines, node.getCols() - 1);
                 node.getDescendents().put(entry.getKey(), child);
+                node.setSplittigAttribute(bestCol);
                 child.setOriginationAttirbute(entry.getKey());
             } else {
                 NonLeafNode child = new NonLeafNode(node, childData, lines, node.getCols() - 1);

@@ -1,15 +1,19 @@
 package tree;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
 public class Tree {
-    //3
+
     private NonLeafNode root;
+    private String[] initialAttributes;
 
     public Tree (NonLeafNode root) {
         this.root = root;
+        initialAttributes = new String[root.getCols()-1];
+        for(int i=0; i<root.getCols()-1; i++) {
+            initialAttributes[i] = root.getData()[0][i];
+        }
     }
 
     public NonLeafNode getRoot() {
@@ -44,6 +48,30 @@ public class Tree {
 
         }
 
+    }
+
+    public String testCase(String line) {
+        System.out.println();
+        System.out.println("Testing for case:");
+        System.out.println(line);
+        Node cur = this.root;
+
+        String[] l = line.split(",");
+
+        while (!cur.isLeaf) {
+            String checkingAttribute = ((NonLeafNode) cur).getSplittigAttribute();
+
+            for(int i=0; i<root.getCols()-1; i++) {
+                if (this.initialAttributes[i].equals(checkingAttribute)) {
+                    String attributeValue = l[i];
+                    cur = ((NonLeafNode) cur).getDescendents().get(attributeValue);
+                    break;
+                }
+            }
+
+        }
+        System.out.println("Result: "+((LeafNode) cur).getClassification());
+        return "";
     }
 
 }

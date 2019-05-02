@@ -16,7 +16,9 @@ public class Main {
         id3.createTree(tree.getRoot());
         tree.printTree();
 
-
+        String toTest = "X12,Yes,Yes,Yes,Yes,Full,$,No,No,Burger,30-60";
+        System.out.println();
+        System.out.println(tree.testCase(toTest));
 
     }
 
