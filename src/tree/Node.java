@@ -6,6 +6,8 @@ public abstract class Node {
     protected String[][] data;
     protected int lines, cols;
     protected Node parent;
+    protected boolean isLeaf;
+    protected String depth = "";
 
     public Node (String[][] data, int lines, int cols) {
         this.data = data;
@@ -31,6 +33,18 @@ public abstract class Node {
 
     public int getCols() {
         return cols;
+    }
+
+    public Node getParent() {
+        return parent;
+    }
+
+    public String getDepth() {
+        return depth;
+    }
+
+    public void setDepth(String depth) {
+        this.depth = depth;
     }
 
     public HashMap<String, Integer> getDiffOutcomes() {

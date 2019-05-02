@@ -8,6 +8,7 @@ public class NonLeafNode extends Node {
 
     public NonLeafNode (String[][] data, int lines, int cols) {
         super(data, lines, cols);
+        this.isLeaf = false;
         descendents = new HashMap<>();
     }
     public NonLeafNode (Node parent, String[][] data, int lines, int cols) {

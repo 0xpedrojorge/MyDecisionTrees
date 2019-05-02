@@ -25,9 +25,10 @@ public class DataManager {
                 numberOfLines++;
             }
         } catch (Exception e) {
+
             System.out.println("Done reading file.");
         }
-
+//3
         String[][] data = new String[numberOfLines][attributeNumber];
 
         try {

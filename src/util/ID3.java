@@ -9,14 +9,14 @@ public class ID3 {
 
     public void createTree(Node node) {
         if (node == null) return;
-        if (!isPure(node.getData(), node.getLines(), node.getCols())) {
-
+        if (isPure(node.getData(), node.getLines(), node.getCols())) {
+            //node.printNode();
+            return;
+        } else {
             NonLeafNode node1 = (NonLeafNode) node;
-            System.out.println("-----------------------------------------");
-            node1.printNode();
-            System.out.println();
-            split(node1);
 
+            split(node1);
+            //node1.printNode();
             HashMap<String, Node> child = node1.getDescendents();
 
             for (Map.Entry<String, Node> entry : child.entrySet()) {
@@ -27,18 +27,17 @@ public class ID3 {
 
     private void split(NonLeafNode node) {
         int bestCol = getBestColToSplit(node);
-        System.out.println("Splitting by col: " + node.getData()[0][bestCol]);
-        System.out.println();
 
         HashMap<String, Integer> diffAtt = node.getDiffAttributes(bestCol);
 
         for (Map.Entry<String, Integer> entry : diffAtt.entrySet()) {
 
-            int lines = entry.getValue()+1;
-            String[][] childData = new String[lines][node.getCols()-1];
-            int t=0;
-            for(int i=0; i<node.getCols(); i++) {
+            int lines = entry.getValue() + 1;
+            String[][] childData = new String[lines][node.getCols() - 1];
+            int t = 0;
+            for (int i = 0; i < node.getCols(); i++) {
                 if (i == bestCol) {
+
                     continue;
                 }
                 childData[0][t] = node.getData()[0][i];
@@ -46,10 +45,10 @@ public class ID3 {
             }
 
             int lineInChild = 1;
-            for(int i=1; i<node.getLines(); i++) {
-                int k=0;
+            for (int i = 1; i < node.getLines(); i++) {
+                int k = 0;
                 if (node.getData()[i][bestCol].equals(entry.getKey())) {
-                    for(int j=0; j<node.getCols(); j++) {
+                    for (int j = 0; j < node.getCols(); j++) {
                         if (j == bestCol) {
                             continue;
                         }
@@ -60,20 +59,14 @@ public class ID3 {
                 }
             }
 
-
-            if (isPure(childData, lines, node.getCols()-1)) {
-                LeafNode child = new LeafNode(node, childData, lines, node.getCols()-1);
+            if (isPure(childData, lines, node.getCols() - 1)) {
+                LeafNode child = new LeafNode(node, childData, lines, node.getCols() - 1);
                 node.getDescendents().put(entry.getKey(), child);
-                System.out.println("Pure child:");
-                child.printNode();
-                System.out.println();
+                child.setOriginationAttirbute(entry.getKey());
             } else {
                 NonLeafNode child = new NonLeafNode(node, childData, lines, node.getCols() - 1);
                 child.setSplittigAttribute(bestCol);
                 node.getDescendents().put(entry.getKey(), child);
-                System.out.println("Non pure child:");
-                child.printNode();
-                System.out.println();
             }
 
         }

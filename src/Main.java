@@ -14,6 +14,7 @@ public class Main {
         Tree tree = dataManager.readCSVFile(args[0]);
 
         id3.createTree(tree.getRoot());
+        tree.printTree();
 
 
 
