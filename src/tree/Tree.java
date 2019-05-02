@@ -17,11 +17,11 @@ public class Tree {
     }
 
     public void printTree(){
+        System.out.println();
+        System.out.println("Decision Tree: ");
 
         Stack<Node> stack = new Stack<>();
         stack.push(this.getRoot());
-        System.out.println(this.getRoot().getSplittigAttribute());
-
         while (!stack.isEmpty()){
             System.out.println();
             Node node = stack.pop();

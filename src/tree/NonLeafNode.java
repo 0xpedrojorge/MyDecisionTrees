@@ -1,7 +1,7 @@
 package tree;
 
 import java.util.HashMap;
-//3
+
 public class NonLeafNode extends Node {
     private String splittigAttribute;
     private HashMap<String, Node> descendents;
@@ -17,10 +17,10 @@ public class NonLeafNode extends Node {
     }
 
     public void setSplittigAttribute(int col) {
-        this.splittigAttribute = this.parent.data[0][col];
+        this.splittigAttribute = this.data[0][col];
     }
 
-    public String getSplittigAttribute() {
+    String getSplittigAttribute() {
         return this.splittigAttribute;
     }
 
