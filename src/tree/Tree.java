@@ -24,34 +24,30 @@ public class Tree {
         System.out.println();
         System.out.println("Decision Tree: ");
 
-        Stack<Node> stack = new Stack<>();
-        stack.push(this.getRoot());
-        while (!stack.isEmpty()){
+        printTree(this.root, "", 0);
+    }
+    private void printTree(Node node, String indentation, int rootFlag) {
+        if (node == null) return;
+        if (node.isLeaf) {
+            LeafNode n = (LeafNode) node;
+            System.out.println(n.getClassification() + " (" + (n.getLines()-1) + ")");
+        } else {
+            NonLeafNode n = (NonLeafNode) node;
             System.out.println();
-            Node node = stack.pop();
-            String toPrint;
-
-            if (node.isLeaf){
-
-                LeafNode node1 = (LeafNode) node;
-                System.out.print(node1.getDepth() + node1.getOriginationAttirbute() + " " + ": " + node1.getClassification());
-
-            }else {
-                System.out.print(node.getDepth() + ((NonLeafNode) node).getSplittigAttribute());
-
-                for (Map.Entry<String, Node> entry : ((NonLeafNode) node).getDescendents().entrySet()) {
-                    entry.getValue().setDepth(entry.getValue().getDepth() + " ");
-                    stack.push(entry.getValue());
-
-                }
+            if (rootFlag != 0) {
+                indentation += "    ";
             }
-
+            System.out.println(indentation + "<" + n.getSplittigAttribute() + ">");
+            indentation += "    ";
+            for (Map.Entry<String, Node> child : n.getDescendents().entrySet()) {
+                System.out.print(indentation + child.getKey() + ": ");
+                printTree(child.getValue(), indentation, 1);
+            }
         }
 
     }
 
     public String testCase(String line) {
-        System.out.println();
         System.out.println("Testing for case:");
         System.out.println(line);
         Node cur = this.root;
@@ -61,7 +57,7 @@ public class Tree {
         while (!cur.isLeaf) {
             String checkingAttribute = ((NonLeafNode) cur).getSplittigAttribute();
 
-            for(int i=0; i<root.getCols()-1; i++) {
+            for(int i=1; i<root.getCols()-1; i++) {
                 if (this.initialAttributes[i].equals(checkingAttribute)) {
                     String attributeValue = l[i];
                     cur = ((NonLeafNode) cur).getDescendents().get(attributeValue);

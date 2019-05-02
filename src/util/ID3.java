@@ -13,7 +13,7 @@ public class ID3 {
             NonLeafNode node1 = (NonLeafNode) node;
 
             split(node1);
-            //node1.printNode();
+
             HashMap<String, Node> child = node1.getDescendents();
 
             for (Map.Entry<String, Node> entry : child.entrySet()) {
@@ -60,7 +60,7 @@ public class ID3 {
                 LeafNode child = new LeafNode(node, childData, lines, node.getCols() - 1);
                 node.getDescendents().put(entry.getKey(), child);
                 node.setSplittigAttribute(bestCol);
-                child.setOriginationAttirbute(entry.getKey());
+                child.setOriginationAttribute(entry.getKey());
             } else {
                 NonLeafNode child = new NonLeafNode(node, childData, lines, node.getCols() - 1);
                 node.setSplittigAttribute(bestCol);

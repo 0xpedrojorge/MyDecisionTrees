@@ -3,7 +3,7 @@ package tree;
 public class LeafNode extends Node {
     //3
     private String classification;
-    private String originationAttirbute;
+    private String originationAttribute;
 
     public LeafNode (Node parent, String[][] data, int lines, int cols) {
         super(parent, data, lines, cols);
@@ -11,14 +11,14 @@ public class LeafNode extends Node {
         this.classification = this.data[1][this.cols-1];
     }
 
-    public String getClassification() {
+    String getClassification() {
         return classification;
     }
 
-    public String getOriginationAttirbute() { return originationAttirbute; }
+    public String getOriginationAttribute() { return originationAttribute; }
 
-    public void setOriginationAttirbute(String attribute) {
-        this.originationAttirbute = attribute;
+    public void setOriginationAttribute(String attribute) {
+        this.originationAttribute = attribute;
     }
 
 
